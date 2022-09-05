@@ -1,0 +1,10 @@
+body {
+  background-color: rgb(238, 238, 238);
+}
+
+.game-grid {
+  display: grid;
+  grid-template-areas: 1fr 1fr 1fr / 1fr 1fr 1fr;
+  max-width: 650px;
+  max-height: 650px;
+}
