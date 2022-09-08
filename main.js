@@ -2,6 +2,7 @@
 function ImageFab(sign, source) {
   const theImage = document.createElement('img');
   theImage.classList.add(sign);
+  theImage.setAttribute('id', 'sign');
   theImage.setAttribute('src', source);
   theImage.setAttribute('draggable', 'false')
   return {image: theImage}
@@ -26,7 +27,7 @@ const gameBoard = {
   changeGameState: function() {
     if (gameBoard.gameState === 'x') {
       gameBoard.gameState = 'o';
-    } else if (gameBoard.gameState === 'o') {
+    } else if (gameBoard.gameState === 'o' || gameBoard.gameState === 'over') {
       gameBoard.gameState = 'x';
     }
   }
@@ -61,5 +62,14 @@ const gameController = {
         console.log('win');
       }
     }
+  },
+  resetGame: function() {
+    for (let i = 0; i < 9; i++) {
+      gameBoard.boardState[i] = '';
+    }
+    for (sign of document.querySelectorAll('#sign')) {
+      sign.remove();
+    }
+
   }
 }
