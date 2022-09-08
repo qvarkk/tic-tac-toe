@@ -3,8 +3,26 @@ body {
 }
 
 .game-grid {
+  margin: 0 auto;
+  padding: calc(100vh/5) 0;
   display: grid;
-  grid-template-areas: 1fr 1fr 1fr / 1fr 1fr 1fr;
-  max-width: 650px;
-  max-height: 650px;
+  grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+  gap: 10px;
+  width: 450px;
+  height: 450px;
+}
+
+.grid-tile {
+  background-color: rgb(155, 155, 155);
+  border-radius: 20px;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+  transition: background-color .1s; 
+}
+
+.grid-tile:hover {
+  background-color: rgb(128, 128, 128);
+}
+
+.grid-tile:active {
+  background-color: rgb(99,99,99);
 }
