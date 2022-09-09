@@ -1,8 +1,16 @@
 body {
   background-color: rgb(238, 238, 238);
+  font-family: 'Roboto', sans-serif;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .game-grid {
+  position: relative;
   margin: 0 auto;
   padding: calc(100vh/5) 0;
   display: grid;
@@ -10,6 +18,21 @@ body {
   gap: 10px;
   width: 450px;
   height: 450px;
+}
+
+.result-text {
+  position: absolute;
+  margin: 0;
+  font-size: 1.5rem;
+  top: calc(100vh/5 - 3rem);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: rgb(32, 32, 32);
+  z-index: 2;
+}
+
+.display-none {
+  display: none;
 }
 
 .grid-tile {
@@ -33,4 +56,27 @@ body {
   position: absolute;
   top: -3px;
   left: -3px;
+}
+
+.retry-button {
+  margin-top: -100px;
+  padding: 15px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: rgb(32, 32, 32);
+  background-color: rgb(155, 155, 155);
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+  border: none;
+  border-radius: 15px;
+  transition: transform .2s, text-shadow .2s;
+  z-index: 3;
+}
+
+.retry-button:hover {
+  transform: scale(1.2);
+  text-shadow: 0 0 4px white;
+}
+
+.retry-button:active {
+  background-color: rgb(136, 136, 136);
 }
