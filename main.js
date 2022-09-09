@@ -27,7 +27,9 @@ const gameBoard = {
   changeGameState: function() {
     if (gameBoard.gameState === 'x') {
       gameBoard.gameState = 'o';
-    } else if (gameBoard.gameState === 'o' || gameBoard.gameState === 'over') {
+    } else if (gameBoard.gameState === 'o') {
+      gameBoard.gameState = 'x';
+    } else {
       gameBoard.gameState = 'x';
     }
   }
@@ -38,13 +40,15 @@ for (let i = 0; i < 9; i++) {
     if (gameBoard.boardState[i] === '' && gameBoard.gameState !== 'over') {
       gameBoard.boardState[i] = gameBoard.gameState;
       gameBoard.gridUpdate();
-      gameController.checkWin();
       gameBoard.changeGameState();
+      gameController.checkWin();
+      gameController.checkDraw();
     }
   });
 }
 
 const gameController = {
+  resPara: document.querySelector('#resPara'),
   winConditions: [
     [0, 1, 2],
     [3, 4, 5],
@@ -59,17 +63,29 @@ const gameController = {
     for (let i = 0; i < 8; i++) {
       if (gameBoard.boardState[this.winConditions[i][0]] !== '' && gameBoard.boardState[this.winConditions[i][0]] === gameBoard.boardState[this.winConditions[i][1]] && gameBoard.boardState[this.winConditions[i][0]] === gameBoard.boardState[this.winConditions[i][2]]) {
         gameBoard.gameState = 'over';
-        console.log('win');
+        this.resPara.classList.remove('display-none');
+        this.resPara.innerHTML = `Player ${gameBoard.boardState[this.winConditions[i][0]].toUpperCase()} has won!`;
       }
     }
   },
+  checkDraw: function() {
+    if (gameBoard.boardState.includes('') === false) {
+      gameBoard.gameState = 'over';
+      this.resPara.classList.remove('display-none');
+      this.resPara.innerHTML = `It's a draw!`
+    }
+  },
   resetGame: function() {
+    resPara.classList.add('display-none');
     for (let i = 0; i < 9; i++) {
       gameBoard.boardState[i] = '';
     }
     for (sign of document.querySelectorAll('#sign')) {
       sign.remove();
     }
-
-  }
+    gameBoard.changeGameState();
+  },
+  resetBtn: document.querySelector('#retryBtn'),
 }
+
+gameController.resetBtn.addEventListener('click', gameController.resetGame);
